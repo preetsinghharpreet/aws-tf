@@ -1,8 +1,11 @@
+// provider section
 provider "aws" {
   access_key = "${var.aws_access_key}"
   secret_key = "${var.aws_secret_key}"
   region     = "${var.aws_region}"
 }
+
+//resource section
 
 resource "aws_security_group" "MyFirstSG" {
   name        = "tf-instance-sg"
@@ -39,3 +42,11 @@ resource "aws_instance" "MyFirstInstnace" {
     Name = "TF-Server"
    }
 }
+
+
+//output section
+
+output "InstanceIP" {
+  value = aws_instance.MyFirstInstnace[*].public_ip
+}
+
